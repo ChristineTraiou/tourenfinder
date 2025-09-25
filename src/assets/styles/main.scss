@@ -47,18 +47,24 @@ h2, h3, h4, h5, h6, p, a, img {
 }
 
 h1 {
-    font-size: 1.25rem; // 20px 
-    line-height: 1.28; // 25.6px 
-    font-weight:500;
+    font-size: 2rem; // 32px 
+    line-height: 1.28; // 41px 
+    font-weight:600;
 }
 
 h2 {
+    font-size: 1.25rem; // 20px 
+    line-height: 1.28; // 25.6px 
+    font-weight:600;
+}
+
+h3 {
     font-size: 1.5625rem; // 25px
     line-height: 1.28; // 32px, 1.2-1.4
     font-weight:600;
 }
 
-h3 {
+h4 {
     font-size: 1rem; // 16px 
     line-height: 1.5; // 24px statt 20px
     font-weight:500;
@@ -101,6 +107,10 @@ a {
         background-image: url("data:image/svg+xml,%3Csvg width='16' height='18' viewBox='0 0 16 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.375 4.5L12.875 9L8.375 13.5M12.25 9H3.125' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E "); 
         border: 1px solid white;
     }
+}
+
+.blue {
+    color: var(--secondary-color);
 }
 
 // Slider
@@ -240,7 +250,7 @@ a {
         }
     }
 
-    h2 {
+    h3 {
         font-size: 3rem; // 48px
         line-height: 1.29166667; // 62px
     }

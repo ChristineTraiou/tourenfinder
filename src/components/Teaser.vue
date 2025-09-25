@@ -1,72 +1,27 @@
 <script setup>
-    import { ref, onMounted, computed } from 'vue'
+    import { onMounted, computed } from 'vue'
     import { Splide, SplideSlide } from '@splidejs/vue-splide'
-    import teaserPlatzhalter from '@/assets/img/Teaser-Platzhalter.jpg'
-    
-    // Design Variante 2
-    const props = defineProps({
-        v2: Boolean,
-    });
 
-    const slides = ref([
-        {
-            image: teaserPlatzhalter,
-            alt: 'Platzhalter Bild für Teaser 1',
-            title: 'Römerweg 651 durchs Melker Alpenvorland',
-            link: 'https://example.com',
-            arialabel: 'Mehr erfahren zu Römerweg 651 durchs Melker Alpenvorland',
+    const props = defineProps({
+        v2: {
+            type: Boolean,
+            default: false
         },
-        {
-            image: teaserPlatzhalter,
-            alt: 'Platzhalter Bild für Teaser 2',
-            title: 'Römerweg 651 durchs Melker Alpenvorland',
-            link: 'https://example.com',
-            arialabel: 'Mehr erfahren zu Römerweg 651 durchs Melker Alpenvorland',
-        },
-        {
-            image: teaserPlatzhalter,
-            alt: 'Platzhalter Bild für Teaser 3',
-            title: 'Römerweg 651 durchs Melker Alpenvorland',
-            link: 'https://example.com',
-            arialabel: 'Mehr erfahren zu Römerweg 651 durchs Melker Alpenvorland',
-        },
-        {
-            image: teaserPlatzhalter,
-            alt: 'Platzhalter Bild für Teaser 4',
-            title: 'Römerweg 651 durchs Melker Alpenvorland',
-            link: 'https://example.com',
-            arialabel: 'Mehr erfahren zu Römerweg 651 durchs Melker Alpenvorland',
-        },
-        {
-            image: teaserPlatzhalter,
-            alt: 'Platzhalter Bild für Teaser 5',
-            title: 'Römerweg 651 durchs Melker Alpenvorland',
-            link: 'https://example.com',
-            arialabel: 'Mehr erfahren zu Römerweg 651 durchs Melker Alpenvorland',
-        },
-        {
-            image: teaserPlatzhalter,
-            alt: 'Platzhalter Bild für Teaser 6',
-            title: 'Römerweg 651 durchs Melker Alpenvorland',
-            link: 'https://example.com',
-            arialabel: 'Mehr erfahren zu Römerweg 651 durchs Melker Alpenvorland',
-        },
-        {
-            image: teaserPlatzhalter,
-            alt: 'Platzhalter Bild für Teaser 7',
-            title: 'Römerweg 651 durchs Melker Alpenvorland',
-            link: 'https://example.com',
-            arialabel: 'Mehr erfahren zu Römerweg 651 durchs Melker Alpenvorland',
-        },
-        {
-            image: teaserPlatzhalter,
-            alt: 'Platzhalter Bild für Teaser 8',
-            title: 'Römerweg 651 durchs Melker Alpenvorland',
-            link: 'https://example.com',
-            arialabel: 'Mehr erfahren zu Römerweg 651 durchs Melker Alpenvorland',
-        },
-    ])
-    
+        slides: {
+            type: Array,
+            validator: (value) => {
+                return value.every(
+                    slide =>
+                        typeof slide.image === 'string' &&
+                        typeof slide.alt === 'string' &&
+                        typeof slide.title === 'string' &&
+                        (typeof slide.link === 'string' || slide.link === undefined) &&
+                        typeof slide.ariaLabel === 'string'
+                )
+            }
+        }
+    });
+ 
     const options = computed(() => ({
         type: 'slide',
         perPage: props.v2 ? 4 : 2,
@@ -83,7 +38,7 @@
                 fixedWidth: '90%' 
             }
         }
-    }))
+    })) 
 
     onMounted(() => {
         document.querySelectorAll('.splide').forEach(splide => {
@@ -98,7 +53,6 @@
                 controlsWrapper.classList.add(
                     'splide-controls-wrapper',
                     'col-span-10',
-                    'col-start-2',
                     'flex',
                     'justify-center',
                     'items-center',
@@ -115,11 +69,11 @@
 <template>
     <Splide class="teaser" aria-label="Touren Teaser" :key="v2" :options="options">
         <SplideSlide v-for="(slide, index) in slides" :key="index">
-            <div class="teaser-box">
+            <article class="teaser-box">
                 <img :src="slide.image" :alt="slide.alt" loading="lazy"/>
-                <h3>{{ slide.title }}</h3>
-                <a class="link-primary" :href="slide.link" :aria-label="slide.arialabel">mehr erfahren</a>
-            </div>
+                <h4>{{ slide.title }}</h4>
+                <a class="link-primary" :href="slide.link" :aria-label="slide.ariaLabel">mehr erfahren</a>
+            </article>
         </SplideSlide>
     </Splide>
 </template>
